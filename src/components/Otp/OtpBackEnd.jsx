@@ -25,7 +25,6 @@ const OtpBackEnd = ({code, setCode, maxLength, setPinReady}) => {
         return ()=>setPinReady(false)
     },[code])
 
-    // #8A8A99
 
     const toCodeDigitInput =(_value, index)=>{
         const emptyInputChar = " ";
@@ -62,7 +61,6 @@ const OtpBackEnd = ({code, setCode, maxLength, setPinReady}) => {
         maxLength={maxLength}
         keyboardType="number-pad"
         returnKeyType="done"
-        // textContentType="oneTimeCode"
         ref={textInputRef}
         onBlur={handleOnBlur} 
       />
@@ -82,7 +80,6 @@ const styles = StyleSheet.create({
         width:300,
         flexDirection:'row',
         justifyContent:'space-around',
-        gap:10
     },
     otpInput:{
         borderWidth:2,
