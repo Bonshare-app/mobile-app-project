@@ -21,7 +21,7 @@ const Button = ({
         width: "80%",
         height: 56,
         borderWidth: variant == "outline" ? 2 : 0,
-        borderRadius: "30%",
+        // borderRadius: "30%",
         borderColor: variant == "outline" ? "#40B876" : "transparent",
         backgroundColor: variant === "outline" ? "transparent" : "#40B876",
         display: "flex",
