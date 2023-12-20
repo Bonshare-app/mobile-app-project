@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, TextInput, Pressable } from 'react-native'
 import React,{useRef, useState, useEffect} from 'react'
 
 
-const OtpBackEnd = ({code, setCode, maxLength, setPinReady}) => {
+const OtpBackEnd = ({code, setCode, maxLength, setPinReady,inputWidth,inputHeight ,containerWidth}) => {
 
     const numCodeArray = new Array(maxLength).fill(0);
 
@@ -40,7 +40,8 @@ const OtpBackEnd = ({code, setCode, maxLength, setPinReady}) => {
             <View key={index} 
                 style={[styles.otpInput, 
                     inputFocaused && isDigitFocused ? 
-                    styles.otpInputActive : styles.otpInputInActive
+                    styles.otpInputActive : styles.otpInputInActive,
+                    { width: inputWidth, height: inputHeight }
                 ]}
             >
                 <Text style={styles.otpInputText}>{digit}</Text>
@@ -49,8 +50,8 @@ const OtpBackEnd = ({code, setCode, maxLength, setPinReady}) => {
     }
 
   return (
-    <View style={{gap:20}}>
-      <Pressable onPress={handleOnPress} style={styles.otpInputContainer}>
+    <View style={{gap:10}}>
+      <Pressable onPress={handleOnPress} style={[styles.otpInputContainer, { width: containerWidth }]}>
         {numCodeArray.map(toCodeDigitInput)}
       </Pressable>
 
@@ -74,17 +75,15 @@ const styles = StyleSheet.create({
     TextInputStyl:{
         width:1,
         height:1,
-        opacity:0
+        opacity:1
     },
     otpInputContainer:{
-        width:300,
+        width:210,
         flexDirection:'row',
-        justifyContent:'space-around',
+        justifyContent:'space-between',
     },
     otpInput:{
         borderWidth:2,
-        width:65,
-        height:64,
         padding:12,
         borderRadius:5
     },

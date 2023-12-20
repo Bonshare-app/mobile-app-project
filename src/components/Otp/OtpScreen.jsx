@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, Pressable, Keyboard } from 'react-native'
 import React,{useState} from 'react'
 import OtpBackEnd from './OtpBackEnd';
 
-const OtpScreen = () => {
+const OtpScreen = ({inputHeight,inputWidth,containerWidth}) => {
     const [code, setCode] = useState("");
     const [pinReady, setPinReady] = useState(false)
 
@@ -17,6 +17,9 @@ const OtpScreen = () => {
         code={code}
         setCode={setCode}
         maxLength={max_code_length}
+        inputHeight={inputHeight}
+        inputWidth={inputWidth}
+        containerWidth={containerWidth}
       />
 
 
@@ -28,7 +31,7 @@ export default OtpScreen
 
 const styles = StyleSheet.create({
     container:{
-        flex:1,
+        // flex:1,
         flexDirection:'column',
         alignItems:'center',
         justifyContent:'center'
