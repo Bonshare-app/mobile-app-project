@@ -8,7 +8,7 @@ const Button = ({ onPress, loading, label }) => {
 
     <TouchableOpacity
       onPress={onPress}
-      className={`bg-[#1C1C1C] h-full w-[80%] rounded-full flex-row flex justify-center items-center`}
+      className={`bg-[#40B876] h-full w-[80%] rounded-full flex-row flex justify-center items-center`}
     >
       {!loading ? <Text className={`text-white text-xl`}>{label}</Text> : <ActivityIndicator />}
     </TouchableOpacity>

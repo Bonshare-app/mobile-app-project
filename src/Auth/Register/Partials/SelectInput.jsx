@@ -22,7 +22,7 @@ const SelectInput = () => {
   return (
     <View className=" w-full h-14 flex gap-x- flex-row items-center rounded-lg p-3 border border-[#6D6D6D]">
       <TouchableOpacity
-        className="w-[70%] h-full "
+        className="w-[25%] h-full "
         onPress={() => setShow(true)}
         // style={{
         //   width: "80%",
@@ -50,7 +50,7 @@ const SelectInput = () => {
           {/* {countryFlag} {countryCode} */}
         </Text>
       </TouchableOpacity>
-      <View className="flex-1   h-full px-2">
+      <View className="flex-1   h-full px-2 ">
         <TextInput />
       </View>
 
