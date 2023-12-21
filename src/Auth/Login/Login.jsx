@@ -11,6 +11,7 @@ const Login = () => {
   const handleClick = () => {
     if (stage === 1) {
       setStage(2);
+      setLabel("Verify")
      
       // setFooter("Already registered?")
     } 
