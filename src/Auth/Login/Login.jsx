@@ -5,7 +5,7 @@ import SelectInput from '../Register/Partials/SelectInput';
 import OtpVerification from '../Register/Partials/OtpVerification';
 import Button from '../../Comp/Button';
 
-const Login = () => {
+const Login = ({navigation}) => {
   const [stage, setStage] = useState(1);
   const [label, setLabel] = useState("Next");
   const handleClick = () => {
