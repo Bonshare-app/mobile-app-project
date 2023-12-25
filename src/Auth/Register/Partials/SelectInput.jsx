@@ -49,12 +49,10 @@ const SelectInput = () => {
       </TouchableOpacity> */}
       <CountryPicker
         disable={false}
-        // animationType={"slide"}
+        animationType={"slide"}
         language="en"
         hideCountryFlag={false}
         hideCountryCode={false}
-        // containerStyle={styles.pickerStyle}
-        // pickerTitleStyle={styles.pickerStyle}
         countryCode={countryCode}
         selectedValue={selectedValue}
       />
