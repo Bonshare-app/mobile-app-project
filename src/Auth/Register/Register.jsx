@@ -31,12 +31,13 @@ const Register = ({ navigation }) => {
       // setFooter("Already registered?")
     } else if (stage === 2) {
       setStage(3);
-      setLabel("Verify & Sign up");
+      setLabel("Next");
       // setFooter("Already registered?")
     } else {
       setStage(4);
       // setFooter("Not registered?")
       setLabel("Next");
+      navigation.navigate("login")
     }
   };
   const handleBack = () => {
@@ -61,9 +62,11 @@ const Register = ({ navigation }) => {
       ) : stage === 2 ? (
         <OtpVerification back={handleBack}/>
       ) : stage === 3 ? (
-        <Verification back={handleBack}/>
+        // <Verification back={handleBack}/>
+        <UserDetails back={handleBack} detail={"name"}/>
+
       ) : (
-        <UserDetails back={handleBack}/>
+        <UserDetails back={handleBack} detail={"email"}/>
       )}
       <View className="space-y-0.5 w-full flex items-center">
         <Button label={label} onPress={handleClick} />
