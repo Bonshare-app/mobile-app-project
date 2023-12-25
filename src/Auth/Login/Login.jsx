@@ -46,7 +46,7 @@ const Login = ({navigation}) => {
           <TouchableOpacity
             className={``}
             onPress={() => {
-              navigation.navigate('sigup');
+              navigation.navigate('signup');
             }}
           >
             <Text>Sign up</Text>
