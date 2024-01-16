@@ -1,7 +1,7 @@
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { NavigationContainer } from "@react-navigation/native";
-import { View } from "react-native";
+import { View,StatusBar } from "react-native";
 import RootNavigation from "./src/navigations/rootnavigation";
 import { store, persistor } from "./configureStore";
 import React, { useCallback } from "react";
@@ -14,12 +14,15 @@ import {
   Roboto_500Medium,
   Roboto_700Bold,
 } from "@expo-google-fonts/roboto";
+// import { SafeAreaView } from "react-native-safe-area-context";
+// import { StatusBar } from "expo-status-bar";
 
 const Pages = () => {
   // const { loading } = useSelector((state) => state.root.loadingReducer);
 
   return (
     <>
+    <StatusBar barStyle={"dark"}/>
       <RootNavigation />
       {/* {loading && <Loading />} */}
     </>

@@ -7,19 +7,23 @@ import Trip from "../../screens/Trip";
 import Home from "../../screens/Home";
 import Tabs from "../../screens/Tabs";
 import TripLocation from "../../screens/TripLocation";
+import Register from "../../Auth/Register/Register";
+import Login from "../../Auth/Login/Login";
 
 const Stack = createNativeStackNavigator();
 
 const RootNavigation = () => (
   <NavigationContainer>
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="main" component={Tabs} />
+      <Stack.Screen name="signup" component={Register}/>
+      <Stack.Screen name="login" component={Login}/>
+      {/* <Stack.Screen name="main" component={Tabs} />
       <Stack.Screen name="home" component={Home} />
       <Stack.Screen name="message" component={Message} />
       <Stack.Screen name="summary" component={Summary} />
       <Stack.Screen name="avatrip" component={AvailableTrip} />
       <Stack.Screen name="trip" component={Trip} />
-      <Stack.Screen name="triplocation" component={TripLocation} />
+      <Stack.Screen name="triplocation" component={TripLocation} /> */}
     </Stack.Navigator>
   </NavigationContainer>
 );

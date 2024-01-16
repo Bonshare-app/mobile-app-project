@@ -1,56 +1,71 @@
-import { StyleSheet, Text, View, TextInput, Pressable } from 'react-native'
-import React,{useRef, useState, useEffect} from 'react'
+import { StyleSheet, Text, View, TextInput, Pressable } from "react-native";
+import React, { useRef, useState, useEffect } from "react";
 
+const OtpBackEnd = ({
+  code,
+  setCode,
+  maxLength,
+  setPinReady,
+  inputWidth,
+  inputHeight,
+  containerWidth,
+}) => {
+  const numCodeArray = new Array(maxLength).fill(0);
 
-const OtpBackEnd = ({code, setCode, maxLength, setPinReady}) => {
+  const textInputRef = useRef(null);
 
-    const numCodeArray = new Array(maxLength).fill(0);
+  const [inputFocaused, setInputFocaused] = useState(false);
 
-    const textInputRef = useRef(null);
+  const handleOnPress = () => {
+    setInputFocaused(true);
+    textInputRef?.current?.focus();
+  };
 
-    const [inputFocaused, setInputFocaused] = useState(false)
+  const handleOnBlur = () => {
+    setInputFocaused(false);
+  };
 
-    const handleOnPress =()=>{
-        setInputFocaused(true)
-        textInputRef?.current?.focus();
-    };
+  useEffect(() => {
+    setPinReady(code.length === maxLength);
 
-    const handleOnBlur = ()=>{
-        setInputFocaused(false);
-    }
+    return () => setPinReady(false);
+  }, [code]);
 
-    useEffect(()=>{
-        setPinReady(code.length === maxLength)
+  const toCodeDigitInput = (_value, index) => {
+    const emptyInputChar = " ";
+    const digit = code[index] || emptyInputChar;
 
-        return ()=>setPinReady(false)
-    },[code])
+    const isCurrentDigit = index === code.length;
+    const isLastDigit = index === maxLength - 1;
+    const isCodeFull = code.length === maxLength;
 
+    const isDigitFocused = isCurrentDigit || (isLastDigit && isCodeFull);
+    const isDigitFilled = code.length > index;
 
-    const toCodeDigitInput =(_value, index)=>{
-        const emptyInputChar = " ";
-        const digit = code[index] || emptyInputChar;
-
-        const isCurrentDigit = index === code.length;
-        const isLastDigit = index === maxLength - 1;
-        const isCodeFull = code.length === maxLength;
-
-        const isDigitFocused = isCurrentDigit || (isLastDigit && isCodeFull);
-
-        return(
-            <View key={index} 
-                style={[styles.otpInput, 
-                    inputFocaused && isDigitFocused ? 
-                    styles.otpInputActive : styles.otpInputInActive
-                ]}
-            >
-                <Text style={styles.otpInputText}>{digit}</Text>
-            </View>
-        )
-    }
+    return (
+      <View
+        key={index}
+        style={[
+          styles.otpInput,
+          isDigitFocused
+            ? styles.otpInputActive
+            : isDigitFilled
+            ? styles.otpInputFilled
+            : styles.otpInputInActive,
+          { width: inputWidth, height: inputHeight },
+        ]}
+      >
+        <Text style={styles.otpInputText}>{digit}</Text>
+      </View>
+    );
+  };
 
   return (
-    <View style={{gap:20}}>
-      <Pressable onPress={handleOnPress} style={styles.otpInputContainer}>
+    <View style={{ gap: 10 }}>
+      <Pressable
+        onPress={handleOnPress}
+        style={[styles.otpInputContainer, { width: containerWidth }]}
+      >
         {numCodeArray.map(toCodeDigitInput)}
       </Pressable>
 
@@ -62,42 +77,44 @@ const OtpBackEnd = ({code, setCode, maxLength, setPinReady}) => {
         keyboardType="number-pad"
         returnKeyType="done"
         ref={textInputRef}
-        onBlur={handleOnBlur} 
+        onBlur={handleOnBlur}
       />
     </View>
-  )
-}
+  );
+};
 
-export default OtpBackEnd
+export default OtpBackEnd;
 
 const styles = StyleSheet.create({
-    TextInputStyl:{
-        width:1,
-        height:1,
-        opacity:0
-    },
-    otpInputContainer:{
-        width:300,
-        flexDirection:'row',
-        justifyContent:'space-around',
-    },
-    otpInput:{
-        borderWidth:2,
-        width:65,
-        height:64,
-        padding:12,
-        borderRadius:5
-    },
-    otpInputInActive:{
-        borderColor:'#8A8A99'
-    },
-    otpInputActive:{
-        borderColor:'black'
-    },
-    otpInputText:{
-        fontSize:22,
-        fontWeight:"bold",
-        color:'black',
-        textAlign:'center'
-    }
-})
+  TextInputStyl: {
+    width: 1,
+    height: 1,
+    opacity: 1,
+  },
+  otpInputContainer: {
+    width: 210,
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  otpInput: {
+    borderWidth: 2,
+    padding: 12,
+    borderRadius: 5,
+  },
+  otpInputInActive: {
+    borderColor: "#8A8A99",
+  },
+  otpInputActive: {
+    borderColor: "#40B876",
+  },
+  otpInputFilled: {
+    borderColor: "#40B876",
+
+  },
+  otpInputText: {
+    fontSize: 22,
+    fontWeight: "bold",
+    color: "black",
+    textAlign: "center",
+  },
+});
