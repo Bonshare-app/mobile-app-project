@@ -10,15 +10,23 @@ import TripLocation from "../../screens/TripLocation";
 import Register from "../../Auth/Register/Register";
 import Login from "../../Auth/Login/Login";
 
+// New Screens added
+import CreateProfile from "../../AuthFlowEnd/CreateProfile";
+import Welcome from "../../AuthFlowEnd/Welcome";
+import PassengerTab from "../../PassengerFlow/PassengerTab";
+
 const Stack = createNativeStackNavigator();
 
 const RootNavigation = () => (
   <NavigationContainer>
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="signup" component={Register}/>
-      <Stack.Screen name="login" component={Login}/>
-      {/* <Stack.Screen name="main" component={Tabs} />
-      <Stack.Screen name="home" component={Home} />
+      {/* <Stack.Screen name="signup" component={Register}/>
+      <Stack.Screen name="login" component={Login}/> */}
+      <Stack.Screen name="crprofile" component={CreateProfile} />
+      <Stack.Screen name="welcome" component={Welcome} />
+      <Stack.Screen name="homepsrides" component={PassengerTab} />
+      {/* <Stack.Screen name="main" component={Tabs} /> */}
+      {/* <Stack.Screen name="home" component={Home} />
       <Stack.Screen name="message" component={Message} />
       <Stack.Screen name="summary" component={Summary} />
       <Stack.Screen name="avatrip" component={AvailableTrip} />
