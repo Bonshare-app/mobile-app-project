@@ -7,9 +7,13 @@ import { AntDesign, Ionicons, MaterialCommunityIcons, MaterialIcons } from '@exp
 import Button2 from '../../components/Button2'
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import DateTimePickerModal from "react-native-modal-datetime-picker";
+import moment from 'moment'
 const CityToCity = () => {
 
     const [modalVisible, setModalVisible] = useState(false)
+
+    const [tpDate, setTpDate] = useState("dd-mm-yy")
 
     const [countBtn, setCountBtn] = useState(true)
     const [numUsers, setNumUsers] = useState(1)
@@ -21,6 +25,23 @@ const CityToCity = () => {
     const snapPoints = useMemo(() => ['50%'], []);
 
     const lTsnapPoints = useMemo(() => ['34%'], []);
+
+    const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+
+    const showDatePicker = () => {
+        setDatePickerVisibility(true);
+    };
+
+    const hideDatePicker = () => {
+        setDatePickerVisibility(false);
+    };
+
+    const handleConfirm = (date) => {
+        console.log("A date has been picked: ", date);
+        console.log(moment(date).format('D MMMM YYYY'))
+        setTpDate(`${moment(date).format('ddd, MMM D')}`)
+        hideDatePicker();
+    };
   
     // callbacks
     const handleSheetChanges = useCallback((index) => {
@@ -89,7 +110,9 @@ const CityToCity = () => {
         >
     
         </MapView>
-            {/* <View style={styles.btmShet}></View> */}
+
+        
+            
         <BottomSheet
             ref={bottomSheetRef}
             index={0}
@@ -130,14 +153,17 @@ const CityToCity = () => {
                 <View style={{flexDirection:'row',justifyContent:"space-between"}}>
 
                     {/* Left */}
-                    <TouchableOpacity style={{flexDirection:'row', alignItems:'center',marginTop:10}}>
+                    <TouchableOpacity
+                        onPress={()=>showDatePicker()} 
+                        style={{flexDirection:'row', alignItems:'center',marginTop:10}}
+                    >
                         <MaterialCommunityIcons 
                             name="calendar-month-outline" 
                             size={24} color="black" 
                         />
 
-                        <Text style={{borderBottomWidth:1, width:"50%"}}>
-                            Wed, Jan 3
+                        <Text style={{borderBottomWidth:1, fontSize:14, width:"50%"}}>
+                            {tpDate}
                         </Text>
                     </TouchableOpacity>
                     {/* Right */}
@@ -152,7 +178,7 @@ const CityToCity = () => {
                              
                         />
 
-                        <Text style={{borderBottomWidth:1, width:"50%",}}>
+                        <Text style={{borderBottomWidth:1, fontSize:14, width:"50%",}}>
                             {numUsers}
                         </Text>
                     </TouchableOpacity>
@@ -166,7 +192,16 @@ const CityToCity = () => {
             </View>
         </BottomSheet>
 
+        {/* Date time */}
+        <DateTimePickerModal
+            isVisible={isDatePickerVisible}
+            mode="date"
+            minimumDate={new Date()}
+            onConfirm={handleConfirm}
+            onCancel={hideDatePicker}
+        />
 
+        {/* Passenger Counter */}
         <Modal
             animationType="slide"
             transparent={true}
@@ -174,41 +209,41 @@ const CityToCity = () => {
             onRequestClose={() => setModalVisible(false)}
             
         >
-        <View style={{flex:1,backgroundColor:'rgba(128, 128, 128, 0.5)'}}>
+            <View style={{flex:1,backgroundColor:'rgba(128, 128, 128, 0.5)'}}>
 
-          {/* Small Sheet */}
-            <BottomSheet
-                ref={ltbottomSheetRef}
-                index={0}
-                snapPoints={lTsnapPoints}
-                onChange={lThandleSheetChanges}
-            >
-                <View style={{flex:1, backgroundColor:'#F9F9F9'}}>
-                    <Text style={{fontSize:24, fontWeight:"500",textAlign:'center'}}>Select seats</Text>
+            {/* Small Sheet */}
+                <BottomSheet
+                    ref={ltbottomSheetRef}
+                    index={0}
+                    snapPoints={lTsnapPoints}
+                    onChange={lThandleSheetChanges}
+                >
+                    <View style={{flex:1, backgroundColor:'#F9F9F9'}}>
+                        <Text style={{fontSize:24, fontWeight:"500",textAlign:'center'}}>Select seats</Text>
 
-                    <View style={{flexDirection:'row', justifyContent:"space-between", marginTop:10,paddingHorizontal:40}}>
-                        <TouchableOpacity onPress={()=>subUser()}>
-                            <AntDesign 
-                                name="minuscircleo" size={40} 
-                                color={countBtn ? "gray":tcolors.secondary} 
-                            />
-                        </TouchableOpacity>
-                        <Text style={{fontSize:38}}>{numUsers}</Text>
-                        <TouchableOpacity onPress={()=>addUser()}>
-                            <Ionicons 
-                                name="add-circle-outline" 
-                                size={46} color={countBtn ? tcolors.secondary : "gray"} 
-                            />
-                        </TouchableOpacity>
+                        <View style={{flexDirection:'row', justifyContent:"space-between", marginTop:10,paddingHorizontal:40}}>
+                            <TouchableOpacity onPress={()=>subUser()}>
+                                <AntDesign 
+                                    name="minuscircleo" size={40} 
+                                    color={countBtn ? "gray":tcolors.secondary} 
+                                />
+                            </TouchableOpacity>
+                            <Text style={{fontSize:38}}>{numUsers}</Text>
+                            <TouchableOpacity onPress={()=>addUser()}>
+                                <Ionicons 
+                                    name="add-circle-outline" 
+                                    size={46} color={countBtn ? tcolors.secondary : "gray"} 
+                                />
+                            </TouchableOpacity>
+                        </View>
+                        <Button2
+                            text={'Done'}
+                            onPress={() => setModalVisible(false)}
+                        />
                     </View>
-                    <Button2
-                        text={'Done'}
-                        onPress={() => setModalVisible(false)}
-                    />
-                </View>
-            </BottomSheet> 
-        </View>
-      </Modal>
+                </BottomSheet> 
+            </View>
+        </Modal>
 
           
         </View>
@@ -219,6 +254,7 @@ const CityToCity = () => {
   export default CityToCity;
   
   const styles = StyleSheet.create({
+    
       btmShet:{
           width:200, 
           height:200, 

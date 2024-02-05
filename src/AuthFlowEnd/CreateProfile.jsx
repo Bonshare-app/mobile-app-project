@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native'
+import { Image, StyleSheet, View } from 'react-native'
 import React from 'react'
 import Button2 from '../components/Button2'
 import Text from '../components/shared/Text'//REUSABLE TEXT
@@ -8,7 +8,11 @@ const CreateProfile = ({navigation}) => {
     <View style={{flex:1}}>
         <View style={styles.container}>
             {/* Location image */}
-            <View style={{width:148, height:144, backgroundColor:"#c0c0c0"}}></View>
+            {/* <View ></View> */}
+            <Image 
+              source={require('../../assets/twfouradded/bglocation.png')}
+              style={{width:148, height:144, }}
+            />
 
             <Text
               style={{fontSize:24}} bold={true}
