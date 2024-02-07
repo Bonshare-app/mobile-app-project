@@ -16,7 +16,7 @@ import React from "react";
 
 const TopHeader = ({ header, content, moreClass,smallClass }) => {
   return (
-    <View className={` ${moreClass}`}>
+    <View className={`w-full ${moreClass}`}>
       <Text className="font-medium text-2xl text-[#232323]">{header}</Text>
       <Text className={`text-[#585858] text-[16px] ${smallClass}`}>{content}</Text>
     </View>

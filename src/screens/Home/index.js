@@ -40,7 +40,9 @@ const Home = ({ navigation }) => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
+
       <View style={styles.mapView}>
+        
         <MapView
           // provider={PROVIDER_GOOGLE}
           // region={{

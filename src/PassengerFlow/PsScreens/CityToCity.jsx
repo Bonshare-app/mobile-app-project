@@ -9,7 +9,7 @@ import Button2 from '../../components/Button2'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import moment from 'moment'
-const CityToCity = () => {
+const CityToCity = ({navigation}) => {
 
     const [modalVisible, setModalVisible] = useState(false)
 
@@ -185,7 +185,7 @@ const CityToCity = () => {
                 </View>
 
 
-                <Button2
+                <Button2 onPress={()=>navigation.navigate('ride')}
                     text={'Search a ride and prices'} 
                 /> 
                 

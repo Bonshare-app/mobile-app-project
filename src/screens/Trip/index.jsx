@@ -4,6 +4,7 @@ import { AntDesign } from "@expo/vector-icons";
 import Button from "../../components/Button";
 import { SafeAreaView } from "react-native-safe-area-context";
 import ScreenContainer from "../../components/ScreenContainer";
+import TopHeader from "../../Comp/TopHeader";
 
 export default function Trip({ navigation }) {
   return (
@@ -11,6 +12,9 @@ export default function Trip({ navigation }) {
     <ScreenContainer>
       <View style={styles.container}>
         <View>
+          <View className="bg-green-500">
+            <TopHeader content={"hello"} />
+          </View>
           <View style={{ paddingLeft: 21, paddingRight: 27 }}>
             <TouchableOpacity
               onPress={() => navigation.goBack()}
