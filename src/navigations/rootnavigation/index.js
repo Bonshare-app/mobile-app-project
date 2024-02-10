@@ -15,6 +15,7 @@ import CreateProfile from "../../AuthFlowEnd/CreateProfile";
 import Welcome from "../../AuthFlowEnd/Welcome";
 import PassengerTab from "../../PassengerFlow/PassengerTab";
 import Ride from "../../PassengerFlow/PsScreens/Ride";
+import TripDetails from "../../PassengerFlow/PsScreens/TripDetails";
 
 const Stack = createNativeStackNavigator();
 
@@ -33,6 +34,7 @@ const RootNavigation = () => (
       <Stack.Screen name="avatrip" component={AvailableTrip} />
       <Stack.Screen name="trip" component={Trip} />
       <Stack.Screen name="ride" component={Ride}/>
+      <Stack.Screen name="tripdetails" component={TripDetails}/>
       <Stack.Screen name="triplocation" component={TripLocation} />
     </Stack.Navigator>
   </NavigationContainer>

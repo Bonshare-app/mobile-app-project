@@ -1,8 +1,9 @@
-
+import React from 'react'
+import { View } from 'react-native'
 
 const Card = ({moreClass,children}) => {
   return (
-    <View className={ "rounded-lg bg-white" `${moreClass}`}>
+    <View className={ `${moreClass}`}>
         {children}
     </View>
   )
