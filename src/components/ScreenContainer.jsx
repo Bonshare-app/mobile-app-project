@@ -19,7 +19,7 @@ const styles = (color) =>
     statusBarBackground: {
       flex: 1,
       backgroundColor: color,
-      paddingTop: 40,
+      // paddingTop: 40,
     },
   });
 

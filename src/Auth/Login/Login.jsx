@@ -8,6 +8,7 @@ import Button from '../../Comp/Button';
 const Login = ({navigation}) => {
   const [stage, setStage] = useState(1);
   const [label, setLabel] = useState("Next");
+  
   const handleClick = () => {
     if (stage === 1) {
       setStage(2);
@@ -15,6 +16,7 @@ const Login = ({navigation}) => {
      
       // setFooter("Already registered?")
     } 
+    navigation.navigate('crprofile')
   };
   const handleBack = () => {
     // setStage((prev) => prev - 1);
@@ -40,7 +42,7 @@ const Login = ({navigation}) => {
         <OtpVerification back={handleBack} login={"login"}/>
       ) }
       <View className="space-y-0.5 w-full flex items-center">
-        <Button label={label} onPress={handleClick} />
+        <Button label={label} onPress={handleClick} isMain={true} />
         <View className="flex flex-row gap-1">
           <Text>Don’t have an account?</Text>
           <TouchableOpacity
