@@ -8,6 +8,7 @@ import {
   EvilIcons,
   FontAwesome,
   FontAwesome5,
+  Fontisto,
   Ionicons,
   MaterialIcons,
 } from "@expo/vector-icons";
@@ -16,11 +17,14 @@ import Button from "../../Comp/Button";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import BottomSheet from "@gorhom/bottom-sheet";
 
+import CustomCheckbox from "../../components/Checkbox";
+
 const TripDetails = ({ navigation }) => {
   const [showStops, setShowStops] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [stage, setStage] = useState(1);
+  const [isChecked, setChecked] = useState(false);
   const toggleStops = () => {
     setShowStops(!showStops);
   };
@@ -467,8 +471,8 @@ const TripDetails = ({ navigation }) => {
                     <AntDesign name="close" size={24} color="#424256" />
                   </Pressable>
                 </View>
-                <View className="my-5 bg-red-900 h-full">
-                  <View>
+                <View className="my-5  h-full space-y-3">
+                  <View className="space-y-3">
                     <View
                       className="flex flex-row w-full justify-between px-4
                    "
@@ -485,11 +489,59 @@ const TripDetails = ({ navigation }) => {
                           Wallet
                         </Text>
                       </View>
-                      <Text></Text>
+                      <CustomCheckbox
+                        isChecked={isChecked}
+                        onValueChange={setChecked}
+                      />
                     </View>
+
+                    <View className="w-full h-[1px] bg-gray-300"></View>
                   </View>
-                  <View className="w-full h-[0.5px] bg-gray-500">
-                    <Text>3</Text>
+                  <View className="space-y-3">
+                    <View
+                      className="flex flex-row w-full justify-between px-4
+                   "
+                    >
+                      <View className="flex flex-row gap-2 items-center">
+                        <View className="h-12 w-12 flex flex-row items-center justify-center bg-[#E7E9F6] rounded-full">
+                          <Ionicons name="card" size={24} color="#4E61E2" />
+                        </View>
+                        <Text className="text-[#0B0C23] text-base font-semibold">
+                          Card
+                        </Text>
+                      </View>
+                      <CustomCheckbox
+                        isChecked={isChecked}
+                        onValueChange={setChecked}
+                      />
+                    </View>
+                    {/* <Text>4</Text> */}
+                    <View className="w-full h-[1px] bg-gray-300"></View>
+                  </View>
+                  <View className="space-y-3">
+                    <View
+                      className="flex flex-row w-full justify-between px-4
+                   "
+                    >
+                      <View className="flex flex-row gap-2 items-center ">
+                        <View className="h-12 w-12 flex flex-row items-center justify-center bg-[#FDF7DF] rounded-full">
+                          <FontAwesome5
+                            name="money-bill-wave"
+                            size={20}
+                            color="#EDB445"
+                          />
+                        </View>
+                        <Text className="text-[#0B0C23] text-base font-semibold">
+                          Cash
+                        </Text>
+                      </View>
+                      <CustomCheckbox
+                        isChecked={isChecked}
+                        onValueChange={setChecked}
+                      />
+                    </View>
+                    {/* <Text>4</Text> */}
+                    <View className="w-full h-[1px] bg-gray-300"></View>
                   </View>
                 </View>
               </View>

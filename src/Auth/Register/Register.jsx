@@ -69,7 +69,7 @@ const Register = ({ navigation }) => {
         <UserDetails back={handleBack} detail={"email"}/>
       )}
       <View className="space-y-0.5 w-full flex items-center">
-        <Button label={label} onPress={handleClick} />
+        <Button label={label} onPress={handleClick} isMain={true} />
         <View className="flex flex-row gap-1">
           <Text>{footer[stage - 1]}</Text>
           <TouchableOpacity
