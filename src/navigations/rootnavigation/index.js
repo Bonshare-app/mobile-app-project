@@ -23,6 +23,10 @@ import TripDestination from "../../PassengerFlow/DriverScreen/TripDestination";
 import YourDestinationMap from "../../PassengerFlow/DriverScreen/YourDestinationMap";
 import Routes from "../../PassengerFlow/DriverScreen/Routes";
 
+//Imported AddStops Screens
+import AddStopOvers from '../AddStopOvers/AdddStopOvers';
+import AddStop from '../AddStopOvers/AddStop';
+
 const Stack = createNativeStackNavigator();
 
 const RootNavigation = () => (
@@ -47,6 +51,10 @@ const RootNavigation = () => (
       <Stack.Screen name="yourlocation" component={YourLocationMap} />
       <Stack.Screen name="tripdestination" component={TripDestination} />
       <Stack.Screen name="yourdestination" component={YourDestinationMap} />
+      <Stack.Screen name="AddStopOvers" component={AddStopOvers} />
+
+      //Added AddStops Screens
+      <Stack.Screen name="AddStop" component={AddStop} />
       <Stack.Screen name="routes" component={Routes} />
 
 
