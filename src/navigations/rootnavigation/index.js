@@ -26,10 +26,9 @@ import Routes from "../../PassengerFlow/DriverScreen/Routes";
 //Imported AddStops Screens
 import AddStopOvers from '../PassengerFlow/DriverScreen/AddStopOvers';
 import AddStop from '../PassengerFlow/DriverScreen/AddStop';
-import SetRuleMessage from '../PassengerFlow/DriverScreen/SetRuleMessage';
 
 //Imported Set Rules Screen
-import SetRuleMessage from '../SetRuleMessage/SetRuleMessage';
+import SetRuleMessage from '../PassengerFlow/DriverScreen/SetRuleMessage';
 
 const Stack = createNativeStackNavigator();
 
