@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet, Image, Button, Pressable, Tex
 import { Ionicons } from '@expo/vector-icons';
 import { Feather, Entypo } from "@expo/vector-icons";
  
-const AddStopOvers = ({ navigation, placeholder, onChangeText, onClear }) => {
+const AddStop = ({ navigation, placeholder, onChangeText, onClear }) => {
   //const [start, setStart] = useState(['Istanbul']);
   const [stopOvers, setStopOvers] = useState([['Istanbul'], ['Izmir']]);
 
@@ -257,4 +257,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AddStopOvers;
+export default AddStop;

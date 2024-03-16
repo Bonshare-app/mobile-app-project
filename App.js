@@ -25,7 +25,7 @@ const Pages = () => {
 
   return (
     <>
-    <StatusBar barStyle={"dark"}/>
+    <StatusBar  barStyle={"dark"} />
       <RootNavigation />
       {/* {loading && <Loading />} */}
     </>
