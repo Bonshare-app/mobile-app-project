@@ -22,10 +22,12 @@ import YourLocationMap from "../../PassengerFlow/DriverScreen/YourLocationMap";
 import TripDestination from "../../PassengerFlow/DriverScreen/TripDestination";
 import YourDestinationMap from "../../PassengerFlow/DriverScreen/YourDestinationMap";
 import Routes from "../../PassengerFlow/DriverScreen/Routes";
+import AddStopOvers from "../../PassengerFlow/DriverScreen/AdddStopOvers";
+import AddStop from "../../PassengerFlow/DriverScreen/AddStop";
 
 //Imported AddStops Screens
-import AddStopOvers from '../AddStopOvers/AdddStopOvers';
-import AddStop from '../AddStopOvers/AddStop';
+// import AddStopOvers from '../AddStopOvers/AdddStopOvers';
+// import AddStop from '../AddStopOvers/AddStop';
 
 const Stack = createNativeStackNavigator();
 
@@ -53,7 +55,7 @@ const RootNavigation = () => (
       <Stack.Screen name="yourdestination" component={YourDestinationMap} />
       <Stack.Screen name="AddStopOvers" component={AddStopOvers} />
 
-      //Added AddStops Screens
+      {/* Added AddStops Screens */}
       <Stack.Screen name="AddStop" component={AddStop} />
       <Stack.Screen name="routes" component={Routes} />
 

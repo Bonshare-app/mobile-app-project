@@ -12,7 +12,7 @@ import MapViewDirections from "react-native-maps-directions";
 import CustomCheckbox from "../../components/Checkbox";
 import Button from "../../Comp/Button";
 
-const Routes = () => {
+const Routes = ({ navigation }) => {
   const origin = {
     latitude: 37.78825,
     longitude: -122.4324,
@@ -25,6 +25,23 @@ const Routes = () => {
     console.log("handleSheetChanges", index);
   }, []);
   const [isChecked, setChecked] = useState(false);
+  const [isCheckedArray, setCheckedArray] = useState([false, false, false]);
+  // const [selectedPaymentOption, setSelectedPaymentOption] = useState("A");
+  // const handleCheckboxChange = (index) => {
+  //   const newArray = [...isCheckedArray];
+  //   newArray[index] = !newArray[index];
+  //   setCheckedArray(newArray);
+  // };
+  const handleCheckboxChange = (index) => {
+    const routeOptions = ["A", "B", "C"];
+    const selectedOption = routeOptions[index];
+    const newArray = isCheckedArray.map((_item, idx) => idx === index);
+    setCheckedArray(newArray);
+
+    // Log the selected payment option
+    // setSelectedPaymentOption(selectedOption);
+    console.log("Selected Payment Option:", selectedOption);
+  };
 
   const onRegionChange = (region) => {
     console.log(region);
@@ -77,7 +94,7 @@ const Routes = () => {
           })}
         </View>
       </BottomSheet> */}
-      <View className="h-[30%] bg-[#39A368] rounded-t-[40px]">
+      <View className="h-[32%]  bg-[#39A368] rounded-t-[40px]">
         <View className=" h-[10%]    ">
           <View className="flex flex-row w-full justify-center items-center gap-x-2">
             <Text className="text-white text-xl font-medium">Istanbul</Text>
@@ -85,21 +102,23 @@ const Routes = () => {
             <Text className="text-white text-xl font-medium">Ankara</Text>
           </View>
         </View>
-        <View className="bg-white h-[90%]  rounded-t-[40px] w-full">
+        <View className="bg-white h-[90%] rounded-t-[40px] w-full">
           <View className="w-full flex justify-center flex-row items-center py-2">
             <Text className="text-xl font-medium text-[#0B0C23]">
+              {/* routes will you take? */}
               Which of this routes will you take?
             </Text>
           </View>
-          <View className="mx-4">
+          <View className="mx-4 mb-2">
             <View className="flex flex-row items-center justify-between border-b py-1">
               <View className="flex items-center">
                 <Text className="text-[#424256]">Route A</Text>
                 <Text className="text-xl">1h 54m</Text>
               </View>
               <CustomCheckbox
-                isChecked={isChecked}
-                onValueChange={setChecked}
+              
+                isChecked={isCheckedArray[0]}
+                onValueChange={() => handleCheckboxChange(0)}
               />
             </View>
             <View className="flex flex-row items-center justify-between border-b py-1">
@@ -108,8 +127,9 @@ const Routes = () => {
                 <Text className="text-xl">1h 54m</Text>
               </View>
               <CustomCheckbox
-                isChecked={isChecked}
-                onValueChange={setChecked}
+                
+                isChecked={isCheckedArray[1]}
+                onValueChange={() => handleCheckboxChange(1)}
               />
             </View>
             <View className="flex flex-row items-center justify-between py-1">
@@ -118,12 +138,18 @@ const Routes = () => {
                 <Text className="text-xl">1h 54m</Text>
               </View>
               <CustomCheckbox
-                isChecked={isChecked}
-                onValueChange={setChecked}
+              
+                isChecked={isCheckedArray[2]}
+                onValueChange={() => handleCheckboxChange(2)}
               />
             </View>
-            {/* <Button
-             label={Next} onPress={() => navigation.navigate()} /> */}
+            <View className="w-full my-2">
+
+            <Button
+              label={"Next"}
+              onPress={() => navigation.navigate("AddStopOvers")}
+            />
+            </View>
           </View>
         </View>
       </View>

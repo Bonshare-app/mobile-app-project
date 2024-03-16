@@ -6,6 +6,7 @@ import {
   AntDesign,
   Entypo,
   EvilIcons,
+  Feather,
   FontAwesome,
   FontAwesome5,
   Fontisto,
@@ -18,6 +19,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import BottomSheet from "@gorhom/bottom-sheet";
 
 import CustomCheckbox from "../../components/Checkbox";
+import LottieView from "lottie-react-native";
 
 const TripDetails = ({ navigation }) => {
   const [showStops, setShowStops] = useState(false);
@@ -25,12 +27,29 @@ const TripDetails = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [stage, setStage] = useState(1);
   const [isChecked, setChecked] = useState(false);
+  const [isCheckedArray, setCheckedArray] = useState([false, false, false]);
+  const [selectedPaymentOption, setSelectedPaymentOption] = useState("Card");
+  const paymentOptions = ["Wallet", "Card", "Cash"];
   const toggleStops = () => {
     setShowStops(!showStops);
   };
+  // const handleCheckboxChange = (index) => {
+  //   const newArray = [...isCheckedArray];
+  //   newArray[index] = !newArray[index];
+  //   setCheckedArray(newArray);
+  // };
+  const handleCheckboxChange = (index) => {
+    const selectedOption = paymentOptions[index];
+    const newArray = isCheckedArray.map((_item, idx) => idx === index);
+    setCheckedArray(newArray);
+
+    // Log the selected payment option
+    setSelectedPaymentOption(selectedOption);
+    console.log("Selected Payment Option:", selectedOption);
+  };
 
   return (
-    <View className="space-y-2 h-full">
+    <View className="space-y-2 h-full" sty>
       <Head title="Trip details" onBackPress={() => navigation.goBack()} />
       <ScrollView style={{ flex: 1 }}>
         <View className="space-y-2">
@@ -388,17 +407,31 @@ const TripDetails = ({ navigation }) => {
               <View className="bg-white px-4 py-2">
                 <View className=" flex flex-row items-center gap-x-1 ">
                   <Ionicons name="card" size={34} color="#40B876" />
-                  <Text className="text-sm text-[#0B0C23]">Card</Text>
-                  <MaterialIcons
-                    name="keyboard-arrow-down"
-                    size={24}
-                    color="black"
-                  />
+                  <Pressable
+                    onPress={() => {
+                      setModalVisible(true);
+                      setStage(1);
+                    }}
+                  >
+                    <View className=" flex flex-row items-center gap-x-1 ">
+                      <Text className="text-sm text-[#0B0C23]">
+                        {selectedPaymentOption}
+                      </Text>
+                      <MaterialIcons
+                        name="keyboard-arrow-down"
+                        size={24}
+                        color="black"
+                      />
+                    </View>
+                  </Pressable>
                 </View>
                 <View className=" w-full">
                   <Button
                     label={"Continue"}
-                    onPress={() => setModalVisible(true)}
+                    onPress={() => {
+                      setModalVisible(true);
+                      setStage(2);
+                    }}
                   />
                 </View>
               </View>
@@ -417,15 +450,114 @@ const TripDetails = ({ navigation }) => {
       >
         <View className="h-full flex bg-gray-300/60 flex-col justify-end">
           {stage === 1 ? (
-            <View className="bg-white h-[25%] rounded-t-3xl">
+            <View className="h-[32%] bg-white rounded-t-3xl">
+              <View className="h-full  py-1">
+                <View className="w-full  flex flex-row relative px-4">
+                  <Text className="text-2xl text-[#0B0C23] mx-auto font-bold">
+                    Payment options
+                  </Text>
+                  <Pressable
+                    onPress={() => {
+                      setStage(1);
+                      setModalVisible(false);
+                    }}
+                    className="absolute right-2 top-0.5"
+                  >
+                    <AntDesign name="close" size={24} color="#424256" />
+                  </Pressable>
+                </View>
+                <View className="my-5  h-full space-y-3">
+                  <View className="space-y-3">
+                    <View
+                      className="flex flex-row w-full justify-between px-4
+      "
+                    >
+                      <View className="flex flex-row gap-2 items-center">
+                        <View className="h-12 w-12 flex flex-row items-center justify-center bg-[#ECF8F1] rounded-full">
+                          <FontAwesome5
+                            name="wallet"
+                            size={24}
+                            color="#2D8354"
+                          />
+                        </View>
+                        <Text className="text-[#0B0C23] text-base font-semibold">
+                          Wallet
+                        </Text>
+                      </View>
+                      <CustomCheckbox
+                        isChecked={isCheckedArray[0]}
+                        onValueChange={() => handleCheckboxChange(0)}
+                      />
+                    </View>
+
+                    <View className="w-full h-[1px] bg-gray-300"></View>
+                  </View>
+                  <View className="space-y-3">
+                    <View
+                      className="flex flex-row w-full justify-between px-4
+      "
+                    >
+                      <View className="flex flex-row gap-2 items-center">
+                        <View className="h-12 w-12 flex flex-row items-center justify-center bg-[#E7E9F6] rounded-full">
+                          <Ionicons name="card" size={24} color="#4E61E2" />
+                        </View>
+                        <Text className="text-[#0B0C23] text-base font-semibold">
+                          Card
+                        </Text>
+                      </View>
+                      <CustomCheckbox
+                        isChecked={isCheckedArray[1]}
+                        onValueChange={() => handleCheckboxChange(1)}
+                      />
+                    </View>
+                    {/* <Text>4</Text> */}
+                    <View className="w-full h-[1px] bg-gray-300"></View>
+                  </View>
+                  <View className="space-y-3">
+                    <View
+                      className="flex flex-row w-full justify-between px-4
+      "
+                    >
+                      <View className="flex flex-row gap-2 items-center ">
+                        <View className="h-12 w-12 flex flex-row items-center justify-center bg-[#FDF7DF] rounded-full">
+                          <FontAwesome5
+                            name="money-bill-wave"
+                            size={20}
+                            color="#EDB445"
+                          />
+                        </View>
+                        <Text className="text-[#0B0C23] text-base font-semibold">
+                          Cash
+                        </Text>
+                      </View>
+                      <CustomCheckbox
+                        isChecked={isCheckedArray[2]}
+                        onValueChange={() => handleCheckboxChange(2)}
+                      />
+                    </View>
+                    <View className="w-full h-[1px] bg-gray-300"></View>
+                    <View className="w-full px-4">
+                      <View className="px-2 flex flex-row gap-x-2 items-center">
+                        <Feather name="plus" size={24} color="#2D8354" />
+                        <Text className="text-base text-[#2D8354]">
+                          Add payment method
+                        </Text>
+                      </View>
+                    </View>
+                  </View>
+                </View>
+              </View>
+            </View>
+          ) : stage === 2 ? (
+            <View className="bg-white h-[29%] rounded-t-3xl">
               <View className="h-full px-4 py-1">
                 <View className="w-full  flex flex-row relative">
                   <Text className="text-2xl text-[#0B0C23] mx-auto font-bold">
                     Fare breakdown
                   </Text>
                   <Pressable
-                    onPress={() => setStage(2)}
                     className="absolute right-0 top-0.5"
+                    onPress={() => setModalVisible(false)}
                   >
                     <AntDesign name="close" size={24} color="#424256" />
                     {/* <EvilIcons name="close" size={24} color="#424256" style={{fontWeight:"bold"}} /> */}
@@ -452,96 +584,48 @@ const TripDetails = ({ navigation }) => {
                     </Text>
                   </View>
                 </View>
+                <View className=" w-full">
+                  <Button
+                    label={"Continue"}
+                    onPress={() => {
+                      setModalVisible(true);
+                      setStage(3);
+                    }}
+                  />
+                </View>
               </View>
             </View>
           ) : (
-            <View className="h-[40%] bg-white rounded-3xl">
-              <View className="h-full  py-1">
-                <View className="w-full  flex flex-row relative px-4">
-                  <Text className="text-2xl text-[#0B0C23] mx-auto font-bold">
-                    Payment options
-                  </Text>
-                  <Pressable
-                    onPress={() => {
-                      setStage(1);
-                      setModalVisible(false);
-                    }}
-                    className="absolute right-2 top-0.5"
+            <View className="h-full bg-white flex justify-center w-full">
+              <View className="justify-end">
+                <View className="h-[70%] item-center w-full flex justify-center ">
+                  <View
+                    style={{ height: 200 }}
+                    className=" flex flex-row items-center justify-center w-full"
                   >
-                    <AntDesign name="close" size={24} color="#424256" />
-                  </Pressable>
+                    <LottieView
+                      style={{ flex: 1 }}
+                      source={require("../../../assets/images/success.json")}
+                      autoPlay
+                      loop={false}
+                    />
+                  </View>
+                  <View className="flex flex-row w-full justify-center">
+                    <View className="w-[65%] items-center flex">
+                      <Text className="text-xl text-[#0B0C23] font-bold">
+                        Successful
+                      </Text>
+                      <Text className="text-base text-center">
+                        You’ll be notified when the driver accepts your request.
+                      </Text>
+                    </View>
+                  </View>
                 </View>
-                <View className="my-5  h-full space-y-3">
-                  <View className="space-y-3">
-                    <View
-                      className="flex flex-row w-full justify-between px-4
-                   "
-                    >
-                      <View className="flex flex-row gap-2 items-center">
-                        <View className="h-12 w-12 flex flex-row items-center justify-center bg-[#ECF8F1] rounded-full">
-                          <FontAwesome5
-                            name="wallet"
-                            size={24}
-                            color="#2D8354"
-                          />
-                        </View>
-                        <Text className="text-[#0B0C23] text-base font-semibold">
-                          Wallet
-                        </Text>
-                      </View>
-                      <CustomCheckbox
-                        isChecked={isChecked}
-                        onValueChange={setChecked}
-                      />
-                    </View>
-
-                    <View className="w-full h-[1px] bg-gray-300"></View>
-                  </View>
-                  <View className="space-y-3">
-                    <View
-                      className="flex flex-row w-full justify-between px-4
-                   "
-                    >
-                      <View className="flex flex-row gap-2 items-center">
-                        <View className="h-12 w-12 flex flex-row items-center justify-center bg-[#E7E9F6] rounded-full">
-                          <Ionicons name="card" size={24} color="#4E61E2" />
-                        </View>
-                        <Text className="text-[#0B0C23] text-base font-semibold">
-                          Card
-                        </Text>
-                      </View>
-                      <CustomCheckbox
-                        isChecked={isChecked}
-                        onValueChange={setChecked}
-                      />
-                    </View>
-                    {/* <Text>4</Text> */}
-                    <View className="w-full h-[1px] bg-gray-300"></View>
-                  </View>
-                  <View className="space-y-3">
-                    <View
-                      className="flex flex-row w-full justify-between px-4
-                   "
-                    >
-                      <View className="flex flex-row gap-2 items-center ">
-                        <View className="h-12 w-12 flex flex-row items-center justify-center bg-[#FDF7DF] rounded-full">
-                          <FontAwesome5
-                            name="money-bill-wave"
-                            size={20}
-                            color="#EDB445"
-                          />
-                        </View>
-                        <Text className="text-[#0B0C23] text-base font-semibold">
-                          Cash
-                        </Text>
-                      </View>
-                      <CustomCheckbox
-                        isChecked={isChecked}
-                        onValueChange={setChecked}
-                      />
-                    </View>
-                    {/* <Text>4</Text> */}
-                    <View className="w-full h-[1px] bg-gray-300"></View>
+              </View>
+              <View className=" justify-end mb-3 h-[30%]">
+                <View className="flex flex-row w-full justify-center ">
+                  <View className="w-[90%]">
+                    <Button label={"View ride"} />
                   </View>
                 </View>
               </View>
