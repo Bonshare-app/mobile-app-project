@@ -22,6 +22,8 @@ import YourLocationMap from "../../PassengerFlow/DriverScreen/YourLocationMap";
 import TripDestination from "../../PassengerFlow/DriverScreen/TripDestination";
 import YourDestinationMap from "../../PassengerFlow/DriverScreen/YourDestinationMap";
 import Routes from "../../PassengerFlow/DriverScreen/Routes";
+import AddStopOvers from "../../PassengerFlow/DriverScreen/AdddStopOvers";
+import AddStop from "../../PassengerFlow/DriverScreen/AddStop";
 
 //Imported AddStops Screens
 import AddStopOvers from '../PassengerFlow/DriverScreen/AddStopOvers';
@@ -57,7 +59,7 @@ const RootNavigation = () => (
       <Stack.Screen name="AddStopOvers" component={AddStopOvers} />
       <Stack.Screen name="SetRuleMessage" component={SetRuleMessage} />
 
-      //Added AddStops Screens
+      {/* Added AddStops Screens */}
       <Stack.Screen name="AddStop" component={AddStop} />
       <Stack.Screen name="routes" component={Routes} />
 
