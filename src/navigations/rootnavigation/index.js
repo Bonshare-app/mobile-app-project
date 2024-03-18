@@ -26,8 +26,11 @@ import AddStopOvers from "../../PassengerFlow/DriverScreen/AdddStopOvers";
 import AddStop from "../../PassengerFlow/DriverScreen/AddStop";
 
 //Imported AddStops Screens
-// import AddStopOvers from '../AddStopOvers/AdddStopOvers';
-// import AddStop from '../AddStopOvers/AddStop';
+import AddStopOvers from '../PassengerFlow/DriverScreen/AddStopOvers';
+import AddStop from '../PassengerFlow/DriverScreen/AddStop';
+
+//Imported Set Rules Screen
+import SetRuleMessage from '../PassengerFlow/DriverScreen/SetRuleMessage';
 
 const Stack = createNativeStackNavigator();
 
@@ -54,6 +57,7 @@ const RootNavigation = () => (
       <Stack.Screen name="tripdestination" component={TripDestination} />
       <Stack.Screen name="yourdestination" component={YourDestinationMap} />
       <Stack.Screen name="AddStopOvers" component={AddStopOvers} />
+      <Stack.Screen name="SetRuleMessage" component={SetRuleMessage} />
 
       {/* Added AddStops Screens */}
       <Stack.Screen name="AddStop" component={AddStop} />

@@ -29,7 +29,7 @@ const AddStopOvers = ({ navigation }) => {
   };
 
   return (
-    <View className="p-0 h-full w-screen bg-white">
+    <View className="p-0 h-full w-full bg-white">
         {/* Back Arrow To Navigate to the previous screen */}
         <View className="flex-row justify-between">
 
@@ -61,27 +61,27 @@ const AddStopOvers = ({ navigation }) => {
                   <View style={{display:"flex", justifyContent: "center", alignSelf:"center", alignItems:""}}>
                       <Image
                       source={require("../../../assets/images/adjust.png")}
-                      style={{top: 4}}
+                      className="mt-1"
                       />
                       <Image
                       source={require("../../../assets/images/Vector-14.png")}
-                      style={{top: "", left: 7.5}}
+                      className="ml-2"
                       />
                       <Image
                       source={require("../../../assets/images/location_on.png")}
-                      style={{top: -4, left: "", tintColor:'navy'}}
+                      className="-mt-1 text-navy"
                       />
             </View>
 
-            <View style={{left:5}}>
-              <ListItem.Title style={{marginBottom: 100}}>{stopOver}</ListItem.Title>
+            <View className="ml-1">
+              <ListItem.Title className="mb-24">{stopOver}</ListItem.Title>
                 <ListItem.Title>{location}</ListItem.Title>
             </View>
 
-            <View style={{ height: 1, backgroundColor: 'gray', marginHorizontal: 10 }} />
+            <View className="h-1 bg-gray-700 mx-2g"/>
               
               </ListItem.Content>
-              <TouchableOpacity style={{top:-50}} onPress={() => removeStopOvers(index)}>
+              <TouchableOpacity className="-mt-12" onPress={() => removeStopOvers(index)}>
                   <Image
                   source={require("../../../assets/images/Iconx.png")}
                   
@@ -104,14 +104,15 @@ const AddStopOvers = ({ navigation }) => {
             borderRadius: 50,
             borderWidth: 1,
             borderColor: '#232323',
+
             marginRight: 250,
             left: 20,
             top: -40}}>
-            <Text style={{color: "#232323", fontSize: 20, }}>+ Add Stop</Text>
+            <Text className="text-white text-xl">+ Add Stop</Text>
         </Pressable>
 
         {/* Navigation button */}
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center',}}>
+        <View className="flex-1 justify-center align-middle">
             <Pressable 
                 onPress={() => navigation.push('SetRuleMessage')} 
                 style={{
@@ -126,7 +127,7 @@ const AddStopOvers = ({ navigation }) => {
                 position: "relative",
                 backgroundColor: "#000035"
                 }}>
-                <Text style={{color: "#fff", fontSize: 20,}}>Next</Text>
+                <Text className="text-white text-xl">Next</Text>
             </Pressable>
         </View>
       </View>
