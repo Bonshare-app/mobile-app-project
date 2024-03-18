@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image, Button, ProgressBar, Pressable, Animated  } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons } from 'react-native-vector-icons';
 import { ListItem } from 'react-native-elements';
+import { Bar } from 'react-native-progress';
 
  
 const AddStopOvers = ({ navigation }) => {
@@ -27,92 +28,68 @@ const AddStopOvers = ({ navigation }) => {
     setStopOvers(addedStopOvers);
   };
 
-  
-  //Propgress Bar Hooks
-  const [progress, setProgress] = useState(new Animated.Value(0));
-
-  //Progress Bar Function
-  useEffect(() => {
-    Animated.timing(progress, {
-      toValue: 75,
-      duration: 2000,
-      useNativeDriver: true,
-    }).start();
-  }, []);
-
-  const animatedValue = new Animated.Value(0);
-
   return (
-    <View style={{flex: 1, backgroundColor: '#fff',}}>
-      <View style={{flex:1, padding:0}}>
+    <View className="p-0 h-full w-full bg-white">
         {/* Back Arrow To Navigate to the previous screen */}
-        <View style={{flexDirection:'row', justifyContent: "space-between", alignItems: ""}}>
-          <TouchableOpacity onPress={() =>{
-            navigation.navigate
-          }}>
-            <Ionicons name="arrow-back-sharp" style={{color: "#232323", fontSize: 24, width: 24, height: 24, top: 50, left: 20}}/>
+        <View className="flex-row justify-between">
 
-          </TouchableOpacity>
-          <Text style={{ color: "#232323", fontSize: 14, width: 58, height: 32, top: 50, left: -25}}>step 2/5 </Text>
-        </View>
+      <TouchableOpacity onPress={() =>{
+        navigation.navigate('')
+      }}>
+        <Ionicons name="arrow-back-sharp" className="text-gray-500 text-2xl w-6 h-8 mt-12 ml-4"/>
 
-        {/* <View style={{borderBottomWidth: 5, borderColor: '#232323', width:"100%", top: 50}}/> */}
-        {/* <ProgressBar progress={progress} width={200} color="blue"> </ProgressBar> */}
-        <View style={styles.containerProgressBar}>
-          <Animated.View style={[styles.bar ]} />
-        </View>
+      </TouchableOpacity>
+      <Text className="text-gray-500 text-sm w-14 h-8 mt-14 mr-4">step 2/5 </Text>
+      </View>
+
+      {/* Progress Bar */}  
+      <View >
+        <Bar className="h-2 border-gray-700 rounded-xs bg-gray-300" progress={0.20} color='green' borderColor='gray' width={400}/>
+      </View>
        
+      <View>
+        <Text className="text-2xl font-semibold w-80 h-28 mt-8 ml-5">Add stopovers to get more passengers <Text className="text-base font-normal">(Optional)</Text></Text>
+        <Text className="text-sm font-normal w-96 h-24 -mt-14 ml-5">Popular stops based on your route preference.</Text>
+      </View>
 
-        <Text style={{ fontSize: 24, fontWeight: "600", width: 346, height: 110, top: 60, left: 21}}>Add stopovers to get more passengers <Text style={{ fontSize: 16, fontWeight: "400"}}>(Optional)</Text></Text>
-        <Text style={{ fontSize: 14, fontWeight: "400", width: 383, height: 100, top: 18, left: 21}}>Popular stops based on your route preference.</Text>
-
+      <View>
         {stopOvers.map((stopOver, index, location) => (
           <ListItem key={index} >
             <View>
-            {/* <Image
-              source={require("../../../assets/images/adjust.png")}
-              style={{top: ""}}
-            />
-            <Image
-              source={require("../../../assets/images/Vector-14.png")}
-              style={{top: "", left: 7.5}}
-            />
-            <Image
-              source={require("../../../assets/images/location_on.png")}
-              style={{top: "", left: ""}}
-            /> */}
+              </View>
+              <ListItem.Content style={{display:"flex", flexDirection:"row", alignItems:"center", right: 120, top:-50}}>
+                  <View style={{display:"flex", justifyContent: "center", alignSelf:"center", alignItems:""}}>
+                      <Image
+                      source={require("../../../assets/images/adjust.png")}
+                      className="mt-1"
+                      />
+                      <Image
+                      source={require("../../../assets/images/Vector-14.png")}
+                      className="ml-2"
+                      />
+                      <Image
+                      source={require("../../../assets/images/location_on.png")}
+                      className="-mt-1 text-navy"
+                      />
             </View>
-            <ListItem.Content style={{display:"flex", flexDirection:"row", alignItems:"center", right: 120, top:-50}}>
-                <View style={{display:"flex", justifyContent: "center", alignSelf:"center", alignItems:""}}>
-                    <Image
-                    source={require("../../../assets/images/adjust.png")}
-                    style={{top: 4}}
-                    />
-                    <Image
-                    source={require("../../../assets/images/Vector-14.png")}
-                    style={{top: "", left: 7.5}}
-                    />
-                    <Image
-                    source={require("../../../assets/images/location_on.png")}
-                    style={{top: -4, left: "", tintColor:'navy'}}
-                    />
-                </View>
-            <View style={{left:5}}>
-                <ListItem.Title style={{marginBottom: 100}}>{stopOver}</ListItem.Title>
+
+            <View className="ml-1">
+              <ListItem.Title className="mb-24">{stopOver}</ListItem.Title>
                 <ListItem.Title>{location}</ListItem.Title>
             </View>
 
-            <View style={{ height: 1, backgroundColor: 'gray', marginHorizontal: 10 }} />
-            
-            </ListItem.Content>
-            <TouchableOpacity style={{top:-50}} onPress={() => removeStopOvers(index)}>
-                <Image
-                source={require("../../../assets/images/Iconx.png")}
-                
-                />
-            </TouchableOpacity>
-          </ListItem>
-        ))}
+            <View className="h-1 bg-gray-700 mx-2g"/>
+              
+              </ListItem.Content>
+              <TouchableOpacity className="-mt-12" onPress={() => removeStopOvers(index)}>
+                  <Image
+                  source={require("../../../assets/images/Iconx.png")}
+                  
+                  />
+              </TouchableOpacity>
+            </ListItem>
+          ))}
+        </View>
 
         {/* functionality to add more stops */}
         <Pressable 
@@ -127,16 +104,17 @@ const AddStopOvers = ({ navigation }) => {
             borderRadius: 50,
             borderWidth: 1,
             borderColor: '#232323',
+
             marginRight: 250,
             left: 20,
             top: -40}}>
-            <Text style={{color: "#232323", fontSize: 20, }}>+ Add Stop</Text>
+            <Text className="text-white text-xl">+ Add Stop</Text>
         </Pressable>
 
         {/* Navigation button */}
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center',}}>
+        <View className="flex-1 justify-center align-middle">
             <Pressable 
-                onPress={() => navigation.push('Next')} 
+                onPress={() => navigation.push('SetRuleMessage')} 
                 style={{
                 paddingTop: 10,
                 paddingBottom: 10,
@@ -149,11 +127,10 @@ const AddStopOvers = ({ navigation }) => {
                 position: "relative",
                 backgroundColor: "#000035"
                 }}>
-                <Text style={{color: "#fff", fontSize: 20,}}>Next</Text>
+                <Text className="text-white text-xl">Next</Text>
             </Pressable>
         </View>
       </View>
-    </View>
   )
 }
 
